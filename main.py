@@ -1,7 +1,6 @@
 from random import Random
 import threading
 import time
-import pandas as pd
 
 import fs
 import pyautogui
