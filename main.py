@@ -1,7 +1,7 @@
 from random import Random
 import threading
 import time
-import pandas as gordao
+#não quero pandas
 
 import fs
 import pyautogui
