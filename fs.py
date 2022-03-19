@@ -2,6 +2,7 @@ from random import randrange, uniform
 import json
 import tweepy
 import chaves
+import enderecos
 
 global BRAZIL_WOE_ID
 global salvos
@@ -9,9 +10,8 @@ global arq
 
 BRAZIL_WOE_ID = 23424768
 
-arq = (r'C:\Users\luarp\PycharmProjects\testecit\salvas')
-arq_tr=(r'C:\Users\luarp\PycharmProjects\testecit\trending_atual')
-
+arq =enderecos.arq
+arq_tr=enderecos.arq_tr
 auth = tweepy.OAuthHandler(chaves.chave1, chaves.chave2)
 auth.set_access_token(chaves.chave3, chaves.chave4)
 api = tweepy.API(auth)
