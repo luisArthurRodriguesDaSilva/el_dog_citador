@@ -1,6 +1,9 @@
 from random import Random
 import threading
 import time
+
+from numpy import integer
+from Fa import *
 import enderecos
 import pyautogui
 from selenium import webdriver
@@ -86,6 +89,7 @@ class bote:
 
     def salvar_autor(self,autor):
         with open(self.arq_dm, "r") as f:
+            #print(self.arq_dm)
             salvos = json.load(f)
     
         salvos.append({"autor": autor})
@@ -97,19 +101,40 @@ class bote:
     
         postado = twets[randrange(0, tamanho)]
         print(f"em postar")
-        if self.existir_em_salvas(postado)==False and len(postado)< 279 and postado!="\n~":
-            print(f"--------{self.existir_em_salvas(postado)}")
-            try:
-                self.api.update_status(postado)
-            except Exception as e:
-                print("-----------------")
-                print(f"{e} : {postado}")
-                self.postar(twets, tamanho)
-                print("-----------------")
-            self.salvar_twet(postado)
-        else:
-            print(f"repetiu{postado}")
-            self.postar(twets,tamanho)
+        try:
+            if self.existir_em_salvas(postado)==False and len(postado)< 279 and postado!="\n~":
+                print(f"--------{self.existir_em_salvas(postado)}")
+                try:
+                    self.api.update_status(postado)
+                except Exception as e:
+                    print("-----------------")
+                    print(f"{e} : {postado}")
+                    self.postar(twets, tamanho)
+                    print("-----------------")
+                self.salvar_twet(postado)
+            else:
+                print(f"repetiu{postado}")
+                self.postar(twets,tamanho)
+        except Exception as e:
+            print(f"é isso {e}")
+
+    def postar_dm(self):
+        with open(self.arq_dm, "r") as f:
+            nomes_da_dm= json.load(f)
+            for i in numeros_aleatorios(quantidade=1,limite=len(nomes_da_dm)):
+                try:
+                    self.pesquisar(nomes_da_dm[i]['autor'])
+                    frases = self.driver.find_elements(By.TAG_NAME, 'p')
+                    autores = self.driver.find_elements(By.CLASS_NAME, "autor")
+                    twets = []
+                    for c in range(len(autores) - 1):
+                        twets.append(f"""“{frases[c].text.replace('"', '')}”
+__
+~{autores[c].text}""")
+                        tamanho = c
+                    self.postar(twets, tamanho)
+                except Exception as e:
+                    print(e) 
 
     def inicializacao_classica(self):
         self.comeca_contagem()
@@ -118,26 +143,23 @@ class bote:
         self.alarme1 = True
         self.driver.maximize_window()
 
-
     def pesquisar(self,a):
         self.comeca_contagem()
         self.driver.find_element(By.NAME, 'q').click()
         self.driver.find_element(By.NAME, 'q').send_keys(a)
         self.driver.find_element(By.NAME, 'q').send_keys(Keys.ENTER)
         self.alarme1 = True
-        #------------------------------------------------------------------------------------------
-    
+        #------------------------------------------------------------------------------------------    
     def ler_dm(self):
         for pessoa in self.api.get_direct_messages():
             mensagem=pessoa._json['message_create']['message_data']['text']
             if(mensagem[0:5]=="autor:" or mensagem[0:6]== "Autor:"):
                 autor=mensagem[6:len(mensagem)]
+                #print(f"em ler dm --{self.existir_em_dm(autor)}--autor:{autor}")
                 if(self.existir_em_dm(autor)==False):
-                    print(autor)
                     self.salvar_autor(autor)
+                    print(f"adicionado {autor} á lista")
                 
-
-
     def rodar(self):
         print("autor,trending,dm ou random?")
         escolha=input()
@@ -190,7 +212,6 @@ __
                     twets=[]
 
                     for c in range (len(autores)-1):
-                        print("cheguei no for")
                         twets.append(f"""“{frases[c].text.replace('"','')}”
 __              
 ~{autores[c].text}""")
@@ -201,7 +222,10 @@ __
                     print(e)
         
         elif(escolha=='dm'):
+            self.inicializacao_classica()
             self.ler_dm()
+            self.postar_dm()
+
 
 
       
