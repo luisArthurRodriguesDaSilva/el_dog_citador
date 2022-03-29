@@ -20,6 +20,7 @@ class bote:
     def __init__(self):
           self.arq =enderecos.arq
           self.arq_tr=enderecos.arq_tr
+          self.arq_dm=enderecos.arq_dm
           self.api = tweepy.API(auth)
           self.brazil_trends = self.api.get_place_trends(BRAZIL_WOE_ID)
           self.alarme1=False
@@ -63,6 +64,17 @@ class bote:
                 break
         return resposta
 
+    def existir_em_dm(self,msg):
+        with open(self.arq_dm, "r") as f:
+            salvos = json.load(f)
+        resposta = False
+        for i in range (len(salvos)):
+            #print(f"(em existir) {salvos[i]['twet']}\n(tamanho) {len(salvos)}  i:{i}")
+            if salvos[i]['autor']==msg:
+                resposta=True
+                break
+        return resposta
+
     def salvar_twet(self,twete):
         with open(self.arq, "r") as f:
             salvos = json.load(f)
@@ -70,6 +82,15 @@ class bote:
         salvos.append({"twet": twete})
     
         with open(self.arq, 'w') as f:
+            json.dump(salvos, f,indent=4)
+
+    def salvar_autor(self,autor):
+        with open(self.arq_dm, "r") as f:
+            salvos = json.load(f)
+    
+        salvos.append({"autor": autor})
+    
+        with open(self.arq_dm, 'w') as f:
             json.dump(salvos, f,indent=4)
 
     def postar(self,twets,tamanho):
@@ -96,9 +117,29 @@ class bote:
         self.driver.get("https://www.pensador.com/citacoes/")
         self.alarme1 = True
         self.driver.maximize_window()
+
+
+    def pesquisar(self,a):
+        self.comeca_contagem()
+        self.driver.find_element(By.NAME, 'q').click()
+        self.driver.find_element(By.NAME, 'q').send_keys(a)
+        self.driver.find_element(By.NAME, 'q').send_keys(Keys.ENTER)
+        self.alarme1 = True
         #------------------------------------------------------------------------------------------
+    
+    def ler_dm(self):
+        for pessoa in self.api.get_direct_messages():
+            mensagem=pessoa._json['message_create']['message_data']['text']
+            if(mensagem[0:5]=="autor:" or mensagem[0:6]== "Autor:"):
+                autor=mensagem[6:len(mensagem)]
+                if(self.existir_em_dm(autor)==False):
+                    print(autor)
+                    self.salvar_autor(autor)
+                
+
+
     def rodar(self):
-        print("autor,trending ou random?")
+        print("autor,trending,dm ou random?")
         escolha=input()
         
         if (escolha == 'random') :
@@ -115,15 +156,13 @@ __
                 self.postar(twets, tamanho)
             except Exception as e:
                 print(e)
-            
+
         elif( escolha == 'autor') :
             print("quem?")
             autor=input()
             self.inicializacao_classica()
             self.comeca_contagem()
-            self.driver.find_element(By.NAME, 'q').click()
-            self.driver.find_element(By.NAME, 'q').send_keys(autor)
-            self.driver.find_element(By.NAME, 'q').send_keys(Keys.ENTER)
+            self.pesquisar(autor)
             self.alarme1 = True
             try:
                 frases = self.driver.find_elements(By.TAG_NAME, 'p')
@@ -137,17 +176,13 @@ __
                 self.postar(twets, tamanho)
             except Exception as e:
                 print(e)
-
-
-        
+      
         elif (escolha == 'trending') :
             self.inicializacao_classica()
             for cara in self.trending_atual():
                 print(self.trending_atual())
                 self.comeca_contagem()
-                self.driver.find_element(By.NAME, 'q').click()
-                self.driver.find_element(By.NAME,'q').send_keys(cara)
-                self.driver.find_element(By.NAME,'q').send_keys(Keys.ENTER)
+                self.pesquisar(cara)
                 self.alarme1=True
                 try:
                     frases=self.driver.find_elements(By.TAG_NAME,'p')
@@ -165,5 +200,8 @@ __
                 except Exception as e:
                     print(e)
         
+        elif(escolha=='dm'):
+            self.ler_dm()
+
 
       
