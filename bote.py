@@ -119,9 +119,10 @@ class bote:
             print(f"é isso {e}")
 
     def postar_dm(self):
+        print("cheguei em postar dm")
         with open(self.arq_dm, "r") as f:
             nomes_da_dm= json.load(f)
-            for i in numeros_aleatorios(quantidade=1,limite=len(nomes_da_dm)):
+            for i in numeros_aleatorios(quantidade=5,limite=len(nomes_da_dm)):
                 try:
                     self.pesquisar(nomes_da_dm[i]['autor'])
                     frases = self.driver.find_elements(By.TAG_NAME, 'p')
@@ -138,7 +139,7 @@ __
 
     def inicializacao_classica(self):
         self.comeca_contagem()
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome()#executable_path='/home/luis/Downloads/cromedriver/chromedriver')
         self.driver.get("https://www.pensador.com/citacoes/")
         self.alarme1 = True
         self.driver.maximize_window()
@@ -223,6 +224,7 @@ __
         
         elif(escolha=='dm'):
             self.inicializacao_classica()
+            self.ler_dm()
             self.ler_dm()
             self.postar_dm()
 
