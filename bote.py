@@ -161,73 +161,78 @@ __
                     self.salvar_autor(autor)
                     print(f"adicionado {autor} á lista")
                 
-    def rodar(self):
-        print("autor,trending,dm ou random?")
-        escolha=input()
-        
-        if (escolha == 'random') :
-            self.inicializacao_classica()
-            try:
-                frases = self.driver.find_elements(By.TAG_NAME, 'p')
-                autores = self.driver.find_elements(By.CLASS_NAME, "autor")
-                twets = []
-                for c in range(len(autores) - 1):
-                    twets.append(f"""“{frases[c].text.replace('"', '')}”
+    def escolha_random(self):
+        self.inicializacao_classica()
+        try:
+            frases = self.driver.find_elements(By.TAG_NAME, 'p')
+            autores = self.driver.find_elements(By.CLASS_NAME, "autor")
+            twets = []
+            for c in range(len(autores) - 1):
+                twets.append(f"""“{frases[c].text.replace('"', '')}”
 __
 ~{autores[c].text}""")
-                    tamanho = c
-                self.postar(twets, tamanho)
-            except Exception as e:
-                print(e)
-
-        elif( escolha == 'autor') :
-            print("quem?")
-            autor=input()
-            self.inicializacao_classica()
+                tamanho = c
+            self.postar(twets, tamanho)
+        except Exception as e:
+            print(e)
+    def escolha_autor(self):
+        print("quem?")
+        autor=input()
+        self.inicializacao_classica()
+        self.comeca_contagem()
+        self.pesquisar(autor)
+        self.alarme1 = True
+        try:
+            frases = self.driver.find_elements(By.TAG_NAME, 'p')
+            autores = self.driver.find_elements(By.CLASS_NAME, "autor")
+            twets = []
+            for c in range(len(autores) - 1):
+                twets.append(f"""“{frases[c].text.replace('"', '')}”
+__
+~{autores[c].text}""")
+                tamanho = c
+            self.postar(twets, tamanho)
+        except Exception as e:
+            print(e)
+    def escolha_trending(self):
+        self.inicializacao_classica()
+        for cara in self.trending_atual():
+            print(self.trending_atual())
             self.comeca_contagem()
-            self.pesquisar(autor)
-            self.alarme1 = True
+            self.pesquisar(cara)
+            self.alarme1=True
             try:
-                frases = self.driver.find_elements(By.TAG_NAME, 'p')
-                autores = self.driver.find_elements(By.CLASS_NAME, "autor")
-                twets = []
-                for c in range(len(autores) - 1):
-                    twets.append(f"""“{frases[c].text.replace('"', '')}”
-__
-~{autores[c].text}""")
-                    tamanho = c
-                self.postar(twets, tamanho)
-            except Exception as e:
-                print(e)
-      
-        elif (escolha == 'trending') :
-            self.inicializacao_classica()
-            for cara in self.trending_atual():
-                print(self.trending_atual())
-                self.comeca_contagem()
-                self.pesquisar(cara)
-                self.alarme1=True
-                try:
-                    frases=self.driver.find_elements(By.TAG_NAME,'p')
-                    autores=self.driver.find_elements(By.CLASS_NAME,"autor")
-                    twets=[]
-
-                    for c in range (len(autores)-1):
-                        twets.append(f"""“{frases[c].text.replace('"','')}”
+                frases=self.driver.find_elements(By.TAG_NAME,'p')
+                autores=self.driver.find_elements(By.CLASS_NAME,"autor")
+                twets=[]
+                for c in range (len(autores)-1):
+                    twets.append(f"""“{frases[c].text.replace('"','')}”
 __              
 ~{autores[c].text}""")
-                        tamanho=c
-                    self.postar(twets,tamanho)
+                    tamanho=c
+                self.postar(twets,tamanho)
 
-                except Exception as e:
-                    print(e)
+            except Exception as e:
+                print(e)
+    def escolha_dm(self):
+        self.inicializacao_classica()
+        self.ler_dm()
+        self.ler_dm()
+        self.postar_dm()
+
+
+    def rodar(self):
+        print("autor,trending,dm ou random?")
+        self.escolha=input()
         
-        elif(escolha=='dm'):
-            self.inicializacao_classica()
-            self.ler_dm()
-            self.ler_dm()
-            self.postar_dm()
+        if (self.escolha == 'random') :
+            self.escolha_random()
 
-
-
-      
+        elif(self.escolha == 'autor') :
+            self.escolha_autor()
+            
+        elif (self.escolha == 'trending') :
+            self.escolha_trending()
+        
+        elif(self.escolha =='dm'):
+            self.escolha_dm()
