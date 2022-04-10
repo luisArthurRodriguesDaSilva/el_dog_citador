@@ -94,8 +94,8 @@ class bote:
         print(f"em postar")
         try:
             existir_em_salvas   = self.existir_em(arquivo=self.arq,coisa="twet",txt="")
-            if existir_em_salvas(txt=postado)==False and len(postado)< 279 and postado!="\n~":
-                print(f"--------{existir_em_salvas(txt=postado)}")
+            if existir_em_salvas==False and len(postado)< 279 and postado!="\n~":
+                print(f"--------{existir_em_salvas}")
                 try:
                     self.api.update_status(postado)
                 except Exception as e:
@@ -177,17 +177,22 @@ __
         self.pesquisar(autor)
         self.alarme1 = True
         try:
+            print("entrei no try")
             frases = self.driver.find_elements(By.TAG_NAME, 'p')
+            print("passeido frases")
             autores = self.driver.find_elements(By.CLASS_NAME, "autor")
+            print(f"passei pelos autores{autores}")
             twets = []
             for c in range(len(autores) - 1):
                 twets.append(f"""“{frases[c].text.replace('"', '')}”
 __
 ~{autores[c].text}""")
+                print(twets)
                 tamanho = c
             self.postar(twets, tamanho)
         except Exception as e:
             print(e)
+
     def escolha_trending(self):
         self.inicializacao_classica()
         for cara in self.trending_atual():
