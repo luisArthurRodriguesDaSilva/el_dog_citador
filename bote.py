@@ -21,13 +21,15 @@ BRAZIL_WOE_ID = 23424768
 
 class bote:
     def __init__(self):
-          self.arq =enderecos.arq
-          self.arq_tr=enderecos.arq_tr
-          self.arq_dm=enderecos.arq_dm
-          self.api = tweepy.API(auth)
-          self.brazil_trends = self.api.get_place_trends(BRAZIL_WOE_ID)
-          self.alarme1=False
-
+        self.arq =enderecos.arq
+        self.arq_tr=enderecos.arq_tr
+        self.arq_dm=enderecos.arq_dm
+        self.api = tweepy.API(auth)
+        self.brazil_trends = self.api.get_place_trends(BRAZIL_WOE_ID)
+        self.alarme1=False
+        #self.existir_em_salvas   = self.existir_em(arquivo=self.arq,coisa="twet",txt="")
+        #self.existir_em_dm       = self.existir_em(arquivo=self.arq_dm,coisa="autor",txt="")
+        
     def escar(self):
           pyautogui.press('esc')
           print('escou1')
@@ -55,25 +57,14 @@ class bote:
           for i in range(int(len(self.brazil_trends[0]['trends'])/10)):
               caras.append(str(self.brazil_trends[0]['trends'][i]['name'].replace('#','')))
           return caras
-
-    def existir_em_salvas(self,postado):
-        with open(self.arq, "r") as f:
+    
+    def existir_em(self,txt,arquivo,coisa):
+        print("passei por aqui")
+        with open(arquivo, "r") as f:
             salvos = json.load(f)
         resposta = False
         for i in range (len(salvos)):
-            #print(f"(em existir) {salvos[i]['twet']}\n(tamanho) {len(salvos)}  i:{i}")
-            if salvos[i]['twet']==postado:
-                resposta=True
-                break
-        return resposta
-
-    def existir_em_dm(self,msg):
-        with open(self.arq_dm, "r") as f:
-            salvos = json.load(f)
-        resposta = False
-        for i in range (len(salvos)):
-            #print(f"(em existir) {salvos[i]['twet']}\n(tamanho) {len(salvos)}  i:{i}")
-            if salvos[i]['autor']==msg:
+            if salvos[i][f"{coisa}"]==txt:
                 resposta=True
                 break
         return resposta
@@ -102,8 +93,9 @@ class bote:
         postado = twets[randrange(0, tamanho)]
         print(f"em postar")
         try:
-            if self.existir_em_salvas(postado)==False and len(postado)< 279 and postado!="\n~":
-                print(f"--------{self.existir_em_salvas(postado)}")
+            existir_em_salvas   = self.existir_em(arquivo=self.arq,coisa="twet",txt="")
+            if existir_em_salvas(txt=postado)==False and len(postado)< 279 and postado!="\n~":
+                print(f"--------{existir_em_salvas(txt=postado)}")
                 try:
                     self.api.update_status(postado)
                 except Exception as e:
@@ -154,10 +146,12 @@ __
     def ler_dm(self):
         for pessoa in self.api.get_direct_messages():
             mensagem=pessoa._json['message_create']['message_data']['text']
-            if(mensagem[0:5]=="autor:" or mensagem[0:6]== "Autor:"):
+            if(mensagem[0:6]=="autor:" or mensagem[0:6]== "Autor:"):
                 autor=mensagem[6:len(mensagem)]
-                #print(f"em ler dm --{self.existir_em_dm(autor)}--autor:{autor}")
-                if(self.existir_em_dm(autor)==False):
+                existir_em_dm       = self.existir_em(arquivo=self.arq_dm,coisa="autor",txt=f"{autor}")
+        
+                print(f"em ler dm --{existir_em_dm}--autor:{autor}")
+                if(existir_em_dm==False):
                     self.salvar_autor(autor)
                     print(f"adicionado {autor} á lista")
                 
@@ -236,3 +230,7 @@ __
         
         elif(self.escolha =='dm'):
             self.escolha_dm()
+
+if __name__ == '__main__':
+    obj=bote()
+    #print(obj.existir_em_dm(txt="jirafa"))
