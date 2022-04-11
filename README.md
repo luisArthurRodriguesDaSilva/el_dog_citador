@@ -7,7 +7,7 @@
   <h5>Autor: nome do autor</h5>
     Observe os exemplos a seguir:
   <div>                                                           
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdca7WUAQWZr9?format=jpg&name=360x360">  
+    <img width = 333 src="https://pbs.twimg.com/media/FPWdca7WUAQWZr9?format=jpg&name=360x360">
   <br>
     <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small"> 
   <br>
