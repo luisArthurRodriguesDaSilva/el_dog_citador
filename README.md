@@ -5,12 +5,10 @@
  <p>A cada dia são sorteados 5 desses autores e deles são sorteadas as citações</p>
     <p>Para adicionar um nome nessa lista de sorteio um seguidor deve mandar uma mensagem na dm com seguinte modelo</p>
   <h5>Autor: nome do autor</h5>
-    Observe os exemplos a seguir:
+    <h4> Observe os exemplos a seguir: </h4>
   <div>                                                           
     <img width = 333 src="https://pbs.twimg.com/media/FPWdca7WUAQWZr9?format=jpg&name=360x360">
-  <br>
     <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small"> 
-  <br>
     <img width = 333 src="https://pbs.twimg.com/media/FPWdc4hXMAcSHUQ?format=jpg&name=360x360">    
   </div>
 <hr>
@@ -53,6 +51,6 @@ A --> S
 S --> v
 v --> fp
 v --> nfp
-nfp --> a
+nfp --> S
 fp --> p
 ```
