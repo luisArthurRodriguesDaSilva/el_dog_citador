@@ -1,7 +1,10 @@
-<h1 align="center"> el_dog_citador </h1>
-<hr>
+<div align="center" >
+  <h1 align="center"> dog das citações </h1>
+ <img width=500 src="https://pbs.twimg.com/profile_images/1485962078733144066/yl74cBsn_400x400.jpg">
+</div>
+<hr />
   <p lang="pt" dir="ltr">
-    O <a href="https://twitter.com/el_dog_citador" >@el_dog_citador</a> funciona através de uma lista de autores enviados pelos seguidores<p>
+    O dog das citações, mas conhecido como <a href="https://twitter.com/el_dog_citador" >@el_dog_citador</a>, funciona através de uma lista de autores enviados pelos seguidores<p>
  <p>A cada dia são sorteados 5 desses autores e deles são sorteadas as citações</p>
     <p>Para adicionar um nome nessa lista de sorteio um seguidor deve mandar uma mensagem na dm com seguinte modelo</p>
   <h5>Autor: nome do autor</h5>
@@ -54,3 +57,10 @@ v --> nfp
 nfp --> S
 fp --> p
 ```
+
+<br />
+<div align ="center">
+  <a  href="https://twitter.com/el_dog_citador">
+    clique aqui para ser redirecionado ao perfil
+  </a>
+</div>
