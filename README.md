@@ -11,8 +11,7 @@
     <h4> Observe os exemplos a seguir: </h4>
   <div>                                                           
     <img width = 333 src="https://pbs.twimg.com/media/FPWdca7WUAQWZr9?format=jpg&name=360x360">
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small"> 
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdc4hXMAcSHUQ?format=jpg&name=360x360">    
+    <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small">   
   </div>
 <hr>
 <div>
