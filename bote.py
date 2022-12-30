@@ -126,7 +126,7 @@ __
 
     def inicializacao_classica(self):
         self.comeca_contagem()
-        self.driver = webdriver.Chrome()#executable_path='/home/luis/Downloads/cromedriver/chromedriver')
+        self.driver = webdriver.Chrome('/home/luis/Downloads/cromedriver/chromedriver')
         self.driver.get("https://www.pensador.com/citacoes/")
         self.alarme1 = True
         self.driver.maximize_window()

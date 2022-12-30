@@ -1,4 +1,6 @@
 from random import *
+
+
 def existir(num,arayo):
       resposta=False
       for i in range(len(arayo)):
@@ -6,7 +8,6 @@ def existir(num,arayo):
                   resposta= True
                   break
       return resposta
-
 
 def numeros_aleatorios(quantidade,limite):
       numeros=[]
