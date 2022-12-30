@@ -1,17 +1,17 @@
-<h1 align="center"> el_dog_citador </h1>
-<hr>
+<div align="center" >
+  <h1 align="center"> dog das citações </h1>
+ <img width=500 src="https://pbs.twimg.com/profile_images/1485962078733144066/yl74cBsn_400x400.jpg">
+</div>
+<hr />
   <p lang="pt" dir="ltr">
-    O @el_dog_citador funciona através de uma lista de autores enviados pelos seguidores<p>
+    O dog das citações, mas conhecido como <a href="https://twitter.com/el_dog_citador" >@el_dog_citador</a>, funciona através de uma lista de autores enviados pelos seguidores<p>
  <p>A cada dia são sorteados 5 desses autores e deles são sorteadas as citações</p>
     <p>Para adicionar um nome nessa lista de sorteio um seguidor deve mandar uma mensagem na dm com seguinte modelo</p>
   <h5>Autor: nome do autor</h5>
-    Observe os exemplos a seguir:
+    <h4> Observe os exemplos a seguir: </h4>
   <div>                                                           
     <img width = 333 src="https://pbs.twimg.com/media/FPWdca7WUAQWZr9?format=jpg&name=360x360">
-  <br>
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small"> 
-  <br>
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdc4hXMAcSHUQ?format=jpg&name=360x360">    
+    <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small">   
   </div>
 <hr>
 <div>
@@ -22,8 +22,44 @@
   <img width = 800 src="https://pbs.twimg.com/media/FP8ZqPqXsAMDu3s?format=jpg&name=small">
 </div>
 <hr width=32%>
-<a href="https://twitter.com/el_dog_citador" target="_blank">
-  <img style="background-color:powderblue;" width="50" src="https://static-asset-delivery.hasbroapps.com/a9e79c9b34ea183cad07eb995c5f51818b6c9447/686e239cee5bd0ad26abe5007b5476e8.png" target="_blank">
-clique aqui para acessar o bot
-    <img style="background-color:powderblue;" width="20" src="https://cdn.usbrandcolors.com/images/logos/twitter-logo.svg" target="_blank">
+
+<h1>Diagrama do funcionamento</h1>
+
+```mermaid
+graph LR
+exec((exec))
+B(dm)
+C(trending)
+D(autor)
+E(random)
+a(string do autor)
+A(array de strings do autor)
+S(sortear citação do autor)
+v(verificar a possibilidade da citação)
+fp(foi possivel)
+nfp(não foi possivel)
+p{publicar}
+
+exec --> E
+exec --> D
+exec --> B
+exec --> C
+B --> A
+C --> A 
+D --> a
+E --> a
+a --> S
+A --> S
+S --> v
+v --> fp
+v --> nfp
+nfp --> S
+fp --> p
+```
+
+<br />
+<div align ="center">
+  <a  href="https://twitter.com/el_dog_citador">
+    clique aqui para ser redirecionado ao perfil
   </a>
+</div>
