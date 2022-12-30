@@ -1,8 +1,5 @@
-import threading
-import time
 from Fa import *
 import enderecos
-import pyautogui
 import json
 import tweepy
 import chaves
