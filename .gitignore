@@ -1,11 +1,10 @@
 /chaves.py
-/enderecos.py
 .env
 /__pycache__/bote.cpython-38.pyc
 /__pycache__/Fa.cpython-38.pyc
 /__pycache__/enderecos.cpython-38.pyc
 /__pycache__/chaves.cpython-38.pyc
-
+*__pycache__*
 /__pycache__/bote.cpython-310.pyc
 /__pycache__/Fa.cpython-310.pyc
 /__pycache__/enderecos.cpython-310.pyc

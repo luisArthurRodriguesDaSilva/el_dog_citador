@@ -5,5 +5,6 @@ import os
 obj=bote()
 #autor,trending,dm ou random?
 while True:
-  obj.rodar('trending')
+  obj.rodar('dm')
+  print('proximo')
   time.sleep(int(os.getenv('intervalo')))

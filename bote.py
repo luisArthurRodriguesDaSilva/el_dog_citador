@@ -1,14 +1,12 @@
 from Fa import *
 import enderecos
 import json
-import tweepy
-import chaves
 import enderecos
 from random import randrange
 import requests
 from bs4 import BeautifulSoup
-from ttApi import api
-BRAZIL_WOE_ID = 23424768
+from ttApi import api, BRAZIL_WOE_ID
+
 
 class bote:
     def __init__(self,):
@@ -81,6 +79,7 @@ class bote:
                 try:
                     frases,autores = self.pesquisar(nomes_da_dm[i]['autor'])
                     twets = []
+                    tamanho=1
                     for c in range(len(autores) - 1):
                         twets.append(f"""“{frases[c].replace('"', '')}”
 __
@@ -90,15 +89,8 @@ __
                 except Exception as e:
                     print(e) 
 
-    def inicializacao_classica(self):
-        self.comeca_contagem()
-        self.driver = webdriver.Chrome('/home/luis/Downloads/cromedriver/chromedriver')
-        self.driver.get("https://www.pensador.com/citacoes/")
-        self.alarme1 = True
-        self.driver.maximize_window()
-
     def pesquisar(self,autor = 'frases'):
-        html = requests.get(f'https://www.pensador.com/{autor}').content    
+        html = requests.get(f'https://www.pensador.com/{autor}', timeout=1).content    
         soup = BeautifulSoup(html, "html.parser")
         phrases = list(map(lambda x:x.text, soup.find_all('p',{'class':'frase'})))
         authors = list(map(lambda x:x.text, soup.find_all('span',{'class':'author-name'})))
@@ -166,17 +158,20 @@ __
 
     def rodar(self,escolha):
         self.escolha = escolha
-        if (self.escolha == 'random') :
-            self.escolha_random()
+        try:
+            if (self.escolha == 'random') :
+                self.escolha_random()
 
-        elif(self.escolha == 'autor') :
-            self.escolha_autor()
-            
-        elif (self.escolha == 'trending') :
-            self.escolha_trending()
-        
-        elif(self.escolha =='dm'):
-            self.escolha_dm()
+            elif(self.escolha == 'autor') :
+                self.escolha_autor()
+
+            elif (self.escolha == 'trending') :
+                self.escolha_trending()
+
+            elif(self.escolha =='dm'):
+                self.escolha_dm()
+        except Exception as e:
+            print(e)
 
 if __name__ == '__main__':
     obj=bote()
