@@ -7,9 +7,7 @@ import enderecos
 from random import randrange
 import requests
 from bs4 import BeautifulSoup
-
-auth = tweepy.OAuthHandler(chaves.chave1, chaves.chave2)
-auth.set_access_token(chaves.chave3, chaves.chave4)
+from ttApi import api
 BRAZIL_WOE_ID = 23424768
 
 class bote:
@@ -17,7 +15,7 @@ class bote:
         self.arq =enderecos.arq
         self.arq_tr=enderecos.arq_tr
         self.arq_dm=enderecos.arq_dm
-        self.api = tweepy.API(auth)
+        self.api = api
         self.brazil_trends = self.api.get_place_trends(BRAZIL_WOE_ID)
         self.alarme1=False
         #self.existir_em_salvas   = self.existir_em(arquivo=self.arq,coisa="twet",txt="")

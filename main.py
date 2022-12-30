@@ -1,7 +1,9 @@
 from bote import *
-intervalo = 7200
+import time
+import os
+
 obj=bote()
 #autor,trending,dm ou random?
 while True:
   obj.rodar('trending')
-  time.sleep(intervalo)
+  time.sleep(int(os.getenv('intervalo')))
