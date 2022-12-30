@@ -1,7 +1,7 @@
 import requests
 
 from bs4 import BeautifulSoup
-q='frases'
+q='thomas edson'
 html = requests.get(f'https://www.pensador.com/{q}',  timeout=1).content
 
 soup = BeautifulSoup(html, "html.parser")

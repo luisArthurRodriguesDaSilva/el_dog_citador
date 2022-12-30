@@ -75,22 +75,31 @@ class bote:
     def postar_dm(self):
         with open(self.arq_dm, "r") as f:
             nomes_da_dm= json.load(f)
-            for i in numeros_aleatorios(quantidade=5,limite=len(nomes_da_dm)):
+            print(nomes_da_dm)
+            for i in numeros_aleatorios(quantidade=5,limite=len(nomes_da_dm)-1):
                 try:
-                    frases,autores = self.pesquisar(nomes_da_dm[i]['autor'])
+                    print('i',i)
+                    queryAutor = nomes_da_dm[i]['autor']
+                    print('queryAutor:',queryAutor)
+                    frases,autores = self.pesquisar(queryAutor)
                     twets = []
-                    tamanho=1
+                    print(frases)
                     for c in range(len(autores) - 1):
+                        print('c',c)
                         twets.append(f"""“{frases[c].replace('"', '')}”
 __
 ~{autores[c]}""")
                         tamanho = c
                     self.postar(twets, tamanho)
+                    print('postei')
                 except Exception as e:
                     print(e) 
 
     def pesquisar(self,autor = 'frases'):
-        html = requests.get(f'https://www.pensador.com/{autor}', timeout=1).content    
+        if autor == 'frases':
+            html = requests.get(f'https://www.pensador.com/{autor}', timeout=5).content 
+        else:
+            html = requests.get(f'https://www.pensador.com/busca.php?q={autor}', timeout=5).content    
         soup = BeautifulSoup(html, "html.parser")
         phrases = list(map(lambda x:x.text, soup.find_all('p',{'class':'frase'})))
         authors = list(map(lambda x:x.text, soup.find_all('span',{'class':'author-name'})))
@@ -152,26 +161,8 @@ __
                 print(e)
     def escolha_dm(self):
         self.ler_dm()
-        self.ler_dm()
+        print('li')
         self.postar_dm()
-
-
-    def rodar(self,escolha):
-        self.escolha = escolha
-        try:
-            if (self.escolha == 'random') :
-                self.escolha_random()
-
-            elif(self.escolha == 'autor') :
-                self.escolha_autor()
-
-            elif (self.escolha == 'trending') :
-                self.escolha_trending()
-
-            elif(self.escolha =='dm'):
-                self.escolha_dm()
-        except Exception as e:
-            print(e)
 
 if __name__ == '__main__':
     obj=bote()

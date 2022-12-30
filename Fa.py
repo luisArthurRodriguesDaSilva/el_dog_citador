@@ -18,9 +18,3 @@ def numeros_aleatorios(quantidade,limite):
                         numeros.append(numero_novo)
                         break
       return numeros
-
-#if __name__ == "__main__":
-#      while 1:
-#            quantidade=input()
-#            limite=input()
-#            print(numeros_aleatorios(quantidade=int(quantidade),limite=int(limite)))
