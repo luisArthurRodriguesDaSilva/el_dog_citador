@@ -1,5 +1,5 @@
 import imagesFuncs as imgf
-from ttApi import postIt, imageToMyDm , getActualTrending
+from ttApi import postIt, imageToMyDm , getActualTrending, notifyByDm
 import os
 import time
 from random import randrange
@@ -10,6 +10,7 @@ isProduction = lambda : os.getenv('producao') == 'true'
 
 while 1 :
   trendingGuys = getActualTrending()
+  notifyByDm(f'trending len{len(trendingGuys)}')
   for guy in trendingGuys:
     try:
       autor = guy
@@ -25,11 +26,11 @@ while 1 :
       imgWithText = imgf.putTextOnImage(editedImage,selectdPhase,selectedAuthor)
       finalImagePath = imgf.saveImage(imgWithText,selectedAuthor)["newPath"]
       print(finalImagePath)
-      postIt(finalImagePath) if isProduction() else imageToMyDm(finalImagePath)
+      postIt(finalImagePath,text=selectedAuthor) if isProduction() else imageToMyDm(finalImagePath)
     except Exception as e:
        print(e)
     print('proximo')
     time.sleep(int(os.getenv('intervalo')))
-  print('saiu da rodinha')
+  notifyByDm('saiu da rodinha')
   time.sleep(4000)
     

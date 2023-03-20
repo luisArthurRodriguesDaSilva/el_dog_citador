@@ -11,8 +11,8 @@ auth.set_access_token(os.getenv('citchave3'),os.getenv('citchave4'))
 api = tweepy.API(auth)
 
 
-def postIt(filename):
-    api.update_status_with_media(status='',filename=filename)
+def postIt(filename,text=""):
+    api.update_status_with_media(status=text,filename=filename)
 def notifyByDm(text):
   api.send_direct_message(1505211970643009544,text=text)
 
