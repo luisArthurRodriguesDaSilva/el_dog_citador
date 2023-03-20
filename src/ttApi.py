@@ -9,7 +9,6 @@ BRAZIL_WOE_ID = 23424768
 auth = tweepy.OAuthHandler(os.getenv('citchave1'),os.getenv('citchave2'))
 auth.set_access_token(os.getenv('citchave3'),os.getenv('citchave4'))
 api = tweepy.API(auth)
-print((api.get_user(screen_name='noBugChapeu')._json['id_str']))
 
 
 def postIt(filename):
