@@ -18,3 +18,6 @@ def numeros_aleatorios(quantidade,limite):
                         numeros.append(numero_novo)
                         break
       return numeros
+
+smallest = lambda a,b : a if a<b else b
+biggest = lambda a,b : a if a<b else b
