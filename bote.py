@@ -1,11 +1,11 @@
-from src.Fa import *
-import src.enderecos as enderecos
+from Fa import *
+import enderecos as enderecos
 import json
-import src.enderecos as enderecos
+import enderecos as enderecos
 from random import randrange
 import requests
 from bs4 import BeautifulSoup
-from src.ttApi import api, BRAZIL_WOE_ID
+from ttApi import api, BRAZIL_WOE_ID
 
 
 class bote:

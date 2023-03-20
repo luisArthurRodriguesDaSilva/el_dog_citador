@@ -2,22 +2,13 @@ import src.imagesFuncs as imgf
 from src.ttApi import postIt, imageToMyDm , notifyByDm
 import os
 import time
-from bs4 import BeautifulSoup
-import requests
 from random import randrange
 import json
+from quotersApi import getQuotes
 
 isProduction = lambda : False
 
-def pesquisar(autor = 'frases'):
-  if autor == 'frases':
-      html = requests.get(f'https://www.pensador.com/{autor}', timeout=5).content 
-  else:
-      html = requests.get(f'https://www.pensador.com/busca.php?q={autor}', timeout=5).content    
-  soup = BeautifulSoup(html, "html.parser")
-  phrases = list(map(lambda x:x.text, soup.find_all('p',{'class':'frase'})))
-  authors = list(map(lambda x:x.text, soup.find_all('span',{'class':'author-name'})))
-  return phrases,authors
+
 
 
 
@@ -29,7 +20,7 @@ with open('nomes_da_dm.json', "r") as f:
       autor = nomes_da_dm[randomNumber]['autor']
 
 
-      phrases,authors = pesquisar(autor)
+      phrases,authors = getQuotes(autor)
       selectdPhase,selectedAuthor = phrases[randomNumber],authors[randomNumber]
       if len(selectdPhase)>200:
          raise 'grande demais'
