@@ -6,6 +6,7 @@ from random import randrange
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from PIL.ImageFilter import BLUR
 import textFuncs as tf
+import Fa
 
 startOfPrompts = 'day realistic, focused, older and modern'
 
@@ -42,11 +43,12 @@ def getBlocksSizes(pilImage):
 def putTextOnImage(pilImage,text,autor):
   img = pilImage
   completeText = tf.putAutor(text,autor=autor)
-  adaptedText , numberOfLines =  tf.divitedText(completeText,diviter)
   imageDraw = ImageDraw.Draw(img)
   widthBlock,heightBlock = getBlocksSizes(img)
   freeSpace = heightBlock*(diviter -1)
-  fontSize = freeSpace/(numberOfLines + 5)
+  adaptedText , numberOfLines =  tf.divitedText(completeText,diviter)
+  divisor = Fa.biggest(numberOfLines+5,diviter+5)
+  fontSize = freeSpace/divisor
   font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize))
   imageDraw.text(
     (widthBlock,heightBlock), #initial cordinates

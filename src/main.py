@@ -10,7 +10,7 @@ isProduction = lambda : False
 
 while 1 :
   trendingGuys = getActualTrending()
-  for guy in trendingGuys[:10]:
+  for guy in trendingGuys:
     try:
       autor = guy
 
@@ -21,12 +21,12 @@ while 1 :
       if len(selectdPhase)>200:
          raise 'grande demais'
 
-      rawImagePath = imgf.crateIAimage(selectdPhase)
+      rawImagePath = 'image.jpg'#imgf.crateIAimage(selectdPhase)
       editedImage = imgf.getEditedImage(rawImagePath)
       imgWithText = imgf.putTextOnImage(editedImage,selectdPhase,selectedAuthor)
       finalImagePath = imgf.saveImage(imgWithText,selectedAuthor)["newPath"]
       print(finalImagePath)
-      postIt(finalImagePath) if isProduction() else imageToMyDm(finalImagePath)
+      #postIt(finalImagePath) if isProduction() else imageToMyDm(finalImagePath)
     except Exception as e:
        print(e)
     print('proximo')
