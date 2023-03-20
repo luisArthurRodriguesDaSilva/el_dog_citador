@@ -45,9 +45,8 @@ def putTextOnImage(pilImage,text,autor):
   completeText = tf.putAutor(adaptedText,autor=autor)
   imageDraw = ImageDraw.Draw(img)
   widthBlock,heightBlock = getBlocksSizes(img)
-
-  fontSize = heightBlock if widthBlock > heightBlock else widthBlock 
-  fontSize = fontSize if numberOfLines < 10 else fontSize*0.6
+  freeSpace = heightBlock*(diviter -1)
+  fontSize = freeSpace/(numberOfLines + 5)
   font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize))
   imageDraw.text(
     (widthBlock,heightBlock), #initial cordinates
