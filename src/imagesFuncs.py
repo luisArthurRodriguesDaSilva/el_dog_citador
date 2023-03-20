@@ -41,8 +41,8 @@ def getBlocksSizes(pilImage):
 
 def putTextOnImage(pilImage,text,autor):
   img = pilImage
-  adaptedText , numberOfLines =  tf.divitedText(text,diviter)
-  completeText = tf.putAutor(adaptedText,autor=autor)
+  completeText = tf.putAutor(text,autor=autor)
+  adaptedText , numberOfLines =  tf.divitedText(completeText,diviter)
   imageDraw = ImageDraw.Draw(img)
   widthBlock,heightBlock = getBlocksSizes(img)
   freeSpace = heightBlock*(diviter -1)
@@ -50,7 +50,7 @@ def putTextOnImage(pilImage,text,autor):
   font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize))
   imageDraw.text(
     (widthBlock,heightBlock), #initial cordinates
-    completeText,
+    adaptedText,
     fill=(250, 250, 250), font=font)
   return img
 

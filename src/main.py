@@ -10,7 +10,7 @@ isProduction = lambda : False
 
 while 1 :
   trendingGuys = getActualTrending()
-  for guy in trendingGuys:
+  for guy in trendingGuys[:10]:
     try:
       autor = guy
 
@@ -25,12 +25,12 @@ while 1 :
       editedImage = imgf.getEditedImage(rawImagePath)
       imgWithText = imgf.putTextOnImage(editedImage,selectdPhase,selectedAuthor)
       finalImagePath = imgf.saveImage(imgWithText,selectedAuthor)["newPath"]
-
+      print(finalImagePath)
       postIt(finalImagePath) if isProduction() else imageToMyDm(finalImagePath)
     except Exception as e:
        print(e)
     print('proximo')
-    time.sleep(int(os.getenv('intervalo')))
+    #time.sleep(int(os.getenv('intervalo')))
   print('saiu da rodinha')
   time.sleep(4000)
     
