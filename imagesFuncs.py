@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from PIL.ImageFilter import BLUR
 import textFuncs as tf
 
-startOfPrompts = 'studio photographic cinematic'
+startOfPrompts = 'day realistic, focused, older and modern'
 
 def crateIAimage(prompt):
   key = os.getenv('openaiApiKey')
@@ -25,12 +25,12 @@ def crateIAimage(prompt):
   return  imageAdress
 
 
-diviter = 15
+diviter = 20
 
 def getEditedImage(imagePath):
   img = Image.open(imagePath)
-  img = img.filter(BLUR).filter(BLUR).filter(BLUR).filter(BLUR)
-  img = ImageEnhance.Brightness(img).enhance(0.3)
+  img = img.filter(BLUR).filter(BLUR).filter(BLUR)
+  img = ImageEnhance.Brightness(img).enhance(0.4)
   return img
     
 def getBlocksSizes(pilImage):
@@ -47,7 +47,7 @@ def putTextOnImage(pilImage,text,autor):
   widthBlock,heightBlock = getBlocksSizes(img)
 
   fontSize = heightBlock if widthBlock > heightBlock else widthBlock 
-  font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize))
+  font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize/numberOfLines))
   imageDraw.text(
     (widthBlock,heightBlock), #initial cordinates
     completeText,
