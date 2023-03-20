@@ -5,7 +5,7 @@ import os
 from random import randrange
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from PIL.ImageFilter import BLUR
-import textFuncs as tf
+import src.textFuncs as tf
 
 startOfPrompts = 'day realistic, focused, older and modern'
 

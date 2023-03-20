@@ -1,4 +1,4 @@
-from bote import *
+from src.bote import *
 import time
 import os
 

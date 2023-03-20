@@ -1,5 +1,5 @@
-import imagesFuncs as imgf
-from ttApi import postIt, imageToMyDm , notifyByDm
+import src.imagesFuncs as imgf
+from src.ttApi import postIt, imageToMyDm , notifyByDm
 import os
 import time
 from bs4 import BeautifulSoup
