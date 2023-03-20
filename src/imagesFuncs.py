@@ -25,7 +25,7 @@ def crateIAimage(prompt):
   return  imageAdress
 
 
-diviter = 20
+diviter = 15
 
 def getEditedImage(imagePath):
   img = Image.open(imagePath)
@@ -47,7 +47,8 @@ def putTextOnImage(pilImage,text,autor):
   widthBlock,heightBlock = getBlocksSizes(img)
 
   fontSize = heightBlock if widthBlock > heightBlock else widthBlock 
-  font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize/numberOfLines))
+  fontSize = fontSize if numberOfLines < 10 else fontSize*0.6
+  font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize))
   imageDraw.text(
     (widthBlock,heightBlock), #initial cordinates
     completeText,
