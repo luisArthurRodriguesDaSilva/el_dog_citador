@@ -19,7 +19,7 @@ def divitedText(text, SizeLine):
   volta = 0
   while 1:
     volta+=1
-    local = getBiggestSmallest(spaces,SizeLine*volta)
+    local = getBiggestSmallest(spaces,(SizeLine*volta)-2)
     if local == 9000:
       break
     text = text[:local] + '\n' + text[local+1:]

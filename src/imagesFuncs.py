@@ -47,6 +47,8 @@ def putTextOnImage(pilImage,text,autor):
   widthBlock,heightBlock = getBlocksSizes(img)
   freeSpace = heightBlock*(diviter -1)
   adaptedText , numberOfLines =  tf.divitedText(completeText,diviter)
+  if numberOfLines > 15:
+    raise 'muitas linhas'
   divisor = Fa.biggest(numberOfLines+5,diviter+5)
   fontSize = freeSpace/divisor
   font = ImageFont.truetype('./font/arial.ttf' ,int(fontSize))
