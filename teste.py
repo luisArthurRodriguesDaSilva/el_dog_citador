@@ -8,10 +8,6 @@ from quotersApi import getQuotes
 
 isProduction = lambda : False
 
-
-
-
-
 with open('nomes_da_dm.json', "r") as f:
   nomes_da_dm= json.load(f)
   for i in range(10):
