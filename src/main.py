@@ -18,15 +18,14 @@ while 1 :
       phrases,authors = getQuotes(autor)
       randomNumber = randrange(1,len(phrases)-1)
       selectdPhase,selectedAuthor = phrases[randomNumber],authors[randomNumber]
-      if len(selectdPhase)>200:
+      if len(selectdPhase)>200 or selectdPhase.count('\n')>2:
          raise 'grande demais'
-
-      rawImagePath = 'image.jpg'#imgf.crateIAimage(selectdPhase)
+      rawImagePath = imgf.crateIAimage(selectdPhase)
       editedImage = imgf.getEditedImage(rawImagePath)
       imgWithText = imgf.putTextOnImage(editedImage,selectdPhase,selectedAuthor)
       finalImagePath = imgf.saveImage(imgWithText,selectedAuthor)["newPath"]
       print(finalImagePath)
-      #postIt(finalImagePath) if isProduction() else imageToMyDm(finalImagePath)
+      postIt(finalImagePath) if isProduction() else imageToMyDm(finalImagePath)
     except Exception as e:
        print(e)
     print('proximo')

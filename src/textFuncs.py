@@ -23,7 +23,7 @@ def divitedText(text, SizeLine):
     if local == 9000:
       break
     text = text[:local] + '\n' + text[local+1:]
-  return text , volta
+  return text , text.count('\n')
 
 def putAutor(quote,autor):
   return f'{quote}\n____\n\n~{autor}'
