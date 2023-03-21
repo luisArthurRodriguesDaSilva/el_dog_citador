@@ -18,3 +18,5 @@ Através de um container rodando num servidor da [railway](https://railway.app/)
 ![citação do flamengo](./readmefiles/mengo-quote.png)
 ![citação do Trump](./readmefiles/Captura%20de%20tela%20de%202023-03-21%2019-46-00.png)
 ![citação do tumblr](./readmefiles/alegria-quote.png)
+
+Veja mais [aqui](https://twitter.com/el_dog_citador)
