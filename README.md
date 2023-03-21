@@ -1,65 +1,20 @@
-<div align="center" >
-  <h1 align="center"> dog das citações </h1>
- <img width=500 src="https://pbs.twimg.com/profile_images/1485962078733144066/yl74cBsn_400x400.jpg">
-</div>
-<hr />
-  <p lang="pt" dir="ltr">
-    O dog das citações, mas conhecido como <a href="https://twitter.com/el_dog_citador" >@el_dog_citador</a>, funciona através de uma lista de autores enviados pelos seguidores<p>
- <p>A cada dia são sorteados 5 desses autores e deles são sorteadas as citações</p>
-    <p>Para adicionar um nome nessa lista de sorteio um seguidor deve mandar uma mensagem na dm com seguinte modelo</p>
-  <h5>Autor: nome do autor</h5>
-    <h4> Observe os exemplos a seguir: </h4>
-  <div>                                                           
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdca7WUAQWZr9?format=jpg&name=360x360">
-    <img width = 333 src="https://pbs.twimg.com/media/FPWdcoTWQAc2tsD?format=jpg&name=small">   
-  </div>
-<hr>
-<div>
-  <h1 >exemplos de twets:</h1>
-  
-  <img width = 800 src="https://pbs.twimg.com/media/FP8ZqaCXMAMw9s1?format=jpg&name=small">
-  <img width = 800 src="https://pbs.twimg.com/media/FP8ZqEwXwAIaZ89?format=jpg&name=small">
-  <img width = 800 src="https://pbs.twimg.com/media/FP8ZqPqXsAMDu3s?format=jpg&name=small">
-</div>
-<hr width=32%>
+# Dog das Citações
 
-<h1>Diagrama do funcionamento</h1>
+![profile image](./readmefiles/perfil-pic.jpg)
 
-```mermaid
-graph LR
-exec((exec))
-B(dm)
-C(trending)
-D(autor)
-E(random)
-a(string do autor)
-A(array de strings do autor)
-S(sortear citação do autor)
-v(verificar a possibilidade da citação)
-fp(foi possivel)
-nfp(não foi possivel)
-p{publicar}
+## funcionamento
 
-exec --> E
-exec --> D
-exec --> B
-exec --> C
-B --> A
-C --> A 
-D --> a
-E --> a
-a --> S
-A --> S
-S --> v
-v --> fp
-v --> nfp
-nfp --> S
-fp --> p
-```
+O [@dog_das_citações](https://twitter.com/el_dog_citador) posta rotineiramente citações de diversos autores populares com imagens junto com imagens relacionadas ao fundo
 
-<br />
-<div align ="center">
-  <a  href="https://twitter.com/el_dog_citador">
-    clique aqui para ser redirecionado ao perfil
-  </a>
-</div>
+Isso é feito atrvéz de uma busca no site [Pensador.com](https://www.pensador.com/) junto de um trabalho com a api geradora de imagens da [OpenAi](https://platform.openai.com/docs/guides/images/image-generation-beta)
+
+Muito do código daqui foi inspirado em outro projéto meu, o [auto-pvr](https://github.com/luisArthurRodriguesDaSilva/auto-pvr), que também trabalha com imagens e textos
+
+Através de um container rodando num servidor da [railway](https://railway.app/),informo que o Dog das Citações ja está em produção :rocket: :rocket: :tada: :fireworks:
+
+### A seguir exemplos dele funcionando
+
+![citação do Airton Senna](./readmefiles/senna-quote.png)
+![citação do flamengo](./readmefiles/mengo-quote.png)
+![citação do Trump](./readmefiles/Captura%20de%20tela%20de%202023-03-21%2019-46-00.png)
+![citação do tumblr](./readmefiles/alegria-quote.png)
