@@ -1,5 +1,5 @@
 import imagesFuncs as imgf
-from ttApi import postIt, imageToMyDm, getActualTrending, notifyByDm
+from ttApi import postIt, imageToMyDm, getActualTrending, notifyByDm, makeFriends
 import os
 import time
 from random import randrange
@@ -13,6 +13,7 @@ while 1:
     notifyByDm(f"trending len{len(trendingGuys)}")
     for guy in trendingGuys:
         try:
+            # makeFriends(guy)
             autor = guy
 
             phrases, authors = getQuotes(autor)

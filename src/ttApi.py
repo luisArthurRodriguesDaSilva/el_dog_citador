@@ -11,15 +11,6 @@ auth.set_access_token(os.getenv("citchave3"), os.getenv("citchave4"))
 api = tweepy.API(auth)
 
 
-def makeFriends(q):
-    busca = api.search_tweets(q=q)
-    for tweet in busca:
-        print(tweet.in_reply_to_user_id)
-        if not tweet.in_reply_to_user_id:
-            print(tweet.text, tweet.created_at, "\n")
-            api.create_friendship(user_id=tweet.in_reply_to_user_id)
-
-
 def postIt(filename, text=""):
     api.update_status_with_media(status=text, filename=filename)
 
@@ -41,8 +32,7 @@ def imageToMyDm(image, text=" s "):
 
 def getActualTrending(WOE_ID=BRAZIL_WOE_ID):
     brazil_trends = api.get_place_trends(WOE_ID)
-    caras = list(map(
-        lambda x: x["name"].replace("#", ""), brazil_trends[0]["trends"]))
+    caras = list(map(lambda x: x["name"].replace("#", ""), brazil_trends[0]["trends"]))
     return caras
 
 
@@ -57,3 +47,15 @@ def getDMautors():
             autor = messageText[6: len(messageText)]
             autors.append(autor)
     return autors
+
+
+def makeFriends(q):
+    try:
+        busca = api.search_tweets(q=q)
+        for tweet in busca:
+            print(tweet.in_reply_to_user_id)
+            if not tweet.in_reply_to_user_id:
+                print(tweet.text, tweet.created_at, "\n")
+                api.create_friendship(user_id=tweet.in_reply_to_user_id)
+    except Exception as e:
+        print(e)
