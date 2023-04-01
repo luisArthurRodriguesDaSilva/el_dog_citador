@@ -32,7 +32,9 @@ def imageToMyDm(image, text=" s "):
 
 def getActualTrending(WOE_ID=BRAZIL_WOE_ID):
     brazil_trends = api.get_place_trends(WOE_ID)
-    caras = list(map(lambda x: x["name"].replace("#", ""), brazil_trends[0]["trends"]))
+    caras = list(
+        map(lambda x: x["name"].replace("#", ""), brazil_trends[0]["trends"])
+    )
     return caras
 
 
@@ -44,7 +46,7 @@ def getDMautors():
         # print(json.dumps(message._json, indent=4))
         messageText = message._json["message_create"]["message_data"]["text"]
         if messageText[0:6] == "autor:" or messageText[0:6] == "Autor:":
-            autor = messageText[6: len(messageText)]
+            autor = messageText[6 : len(messageText)]
             autors.append(autor)
     return autors
 

@@ -1,19 +1,22 @@
 import openai
 import os
 import requests
-import os
-from random import randrange
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from PIL.ImageFilter import BLUR
 import textFuncs as tf
 import Fa
+import dotenv
+
+dotenv.load_dotenv(dotenv.find_dotenv())
 
 startOfPrompts = "day realistic, focused, older and modern"
 
+openai_key = os.getenv("openaiApiKey")
+print(openai_key)
+
 
 def crateIAimage(prompt):
-    key = os.getenv("openaiApiKey")
-    openai.api_key = key
+    openai.api_key = openai_key
     response = openai.Image.create(prompt=startOfPrompts + prompt, n=1, size="512x512")
     image_url = response["data"][0]["url"]
     image = requests.get(image_url).content
@@ -35,7 +38,8 @@ def getEditedImage(imagePath):
 
 def getBlocksSizes(pilImage):
     [width, height] = pilImage.size
-    [widthBlock, heightBlock] = map(lambda x: int(x / diviter), [width, height])
+    [widthBlock, heightBlock] = map(lambda x: int(x / diviter),
+                                    [width, height])
     return widthBlock, heightBlock
 
 
@@ -68,3 +72,6 @@ def saveImage(pilImage, autor):
     newPath = f"{dirPath}/{autor}.jpg"
     pilImage.save(newPath)
     return {"newPath": newPath}
+
+
+crateIAimage("oi")

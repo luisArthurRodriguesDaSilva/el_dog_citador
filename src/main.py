@@ -1,12 +1,14 @@
-import imagesFuncs as imgf
-from ttApi import postIt, imageToMyDm, getActualTrending, notifyByDm, makeFriends
+from imagesFuncs import crateIAimage, getEditedImage, putTextOnImage, saveImage
+from ttApi import postIt, imageToMyDm, getActualTrending, notifyByDm
 import os
 import time
 from random import randrange
-import json
 from quotersApi import getQuotes
 
-isProduction = lambda: os.getenv("producao") == "true"
+
+def isProduction():
+    os.getenv("producao") == "true"
+
 
 while 1:
     trendingGuys = getActualTrending()
@@ -18,13 +20,18 @@ while 1:
 
             phrases, authors = getQuotes(autor)
             randomNumber = randrange(1, len(phrases) - 1)
-            selectdPhase, selectedAuthor = phrases[randomNumber], authors[randomNumber]
+
+            [selectdPhase, selectedAuthor] = [
+                phrases[randomNumber],
+                authors[randomNumber],
+            ]
+
             if len(selectdPhase) > 200 or selectdPhase.count("\n") > 2:
                 raise "grande demais"
-            rawImagePath = imgf.crateIAimage(selectdPhase)
-            editedImage = imgf.getEditedImage(rawImagePath)
-            imgWithText = imgf.putTextOnImage(editedImage, selectdPhase, selectedAuthor)
-            finalImagePath = imgf.saveImage(imgWithText, selectedAuthor)["newPath"]
+            rawImagePath = crateIAimage(selectdPhase)
+            editedImage = getEditedImage(rawImagePath)
+            imgWithText = putTextOnImage(editedImage, selectdPhase, selectedAuthor)
+            finalImagePath = saveImage(imgWithText, selectedAuthor)["newPath"]
             print(finalImagePath)
             postIt(
                 finalImagePath, text=selectedAuthor
