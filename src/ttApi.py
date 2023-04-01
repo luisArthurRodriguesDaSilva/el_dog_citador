@@ -12,11 +12,24 @@ api = tweepy.API(auth)
 
 
 def postIt(filename, text=""):
-    api.update_status_with_media(status=text, filename=filename)
+    try:
+        api.update_status_with_media(status=text, filename=filename)
+    except Exception as e:
+        print(e)
+
+
+def twetIt(text):
+    try:
+        api.update_status(status=text)
+    except Exception as e:
+        print(e)
 
 
 def notifyByDm(text):
-    api.send_direct_message(1505211970643009544, text=text)
+    try:
+        api.send_direct_message(1505211970643009544, text=text)
+    except Exception as e:
+        print(e)
 
 
 def imageToMyDm(image, text=" s "):
@@ -43,7 +56,6 @@ def getDMautors():
     messages = api.get_direct_messages(count=40)
     print(len(messages))
     for message in messages:
-        # print(json.dumps(message._json, indent=4))
         messageText = message._json["message_create"]["message_data"]["text"]
         if messageText[0:6] == "autor:" or messageText[0:6] == "Autor:":
             autor = messageText[6 : len(messageText)]
@@ -54,10 +66,11 @@ def getDMautors():
 def makeFriends(q):
     try:
         busca = api.search_tweets(q=q)
-        for tweet in busca:
-            print(tweet.in_reply_to_user_id)
-            if not tweet.in_reply_to_user_id:
+        for i, tweet in enumerate(busca):
+            if tweet.in_reply_to_user_id:
                 print(tweet.text, tweet.created_at, "\n")
                 api.create_friendship(user_id=tweet.in_reply_to_user_id)
+            if i > 10:
+                break
     except Exception as e:
-        print(e)
+        print(e, __name__)

@@ -72,6 +72,3 @@ def saveImage(pilImage, autor):
     newPath = f"{dirPath}/{autor}.jpg"
     pilImage.save(newPath)
     return {"newPath": newPath}
-
-
-crateIAimage("oi")
