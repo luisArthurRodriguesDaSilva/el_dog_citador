@@ -1,16 +1,11 @@
-from imagesFuncs import crateIAimage, getEditedImage, putTextOnImage, saveImage
 from ttApi import (
     getActualTrending,
     makeFriends,
-    postIt,
     twetIt,
-    imageToMyDm,
     notifyByDm,
 )
 import os
 import time
-from random import randrange
-from quotersApi import getQuotes
 from botWork import getSelectedQuoteInfo, play_image_mode
 
 
