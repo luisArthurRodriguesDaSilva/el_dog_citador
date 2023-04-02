@@ -24,7 +24,7 @@ def divitedText(text, SizeLine):
         local = getBiggestSmallest(spaces, (SizeLine * volta) - 2)
         if local == 9000:
             break
-        text = text[:local] + "\n" + text[local + 1:]
+        text = text[:local] + "\n" + text[local + 1 :]
     return text, text.count("\n")
 
 

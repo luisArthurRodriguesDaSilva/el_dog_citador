@@ -26,7 +26,7 @@ def tryIt(withDm=False):
                 return result
             except Exception as e:
                 if withDm:
-                    notifyByDm(f'{str(e)}\n{func.__name__} erro ')
+                    notifyByDm(f"{str(e)}\n{func.__name__} erro ")
                 else:
                     print(e, "error", func.__name__)
 
@@ -74,7 +74,7 @@ def getDMautors():
     for message in messages:
         messageText = message._json["message_create"]["message_data"]["text"]
         if messageText[0:6] == "autor:" or messageText[0:6] == "Autor:":
-            autor = messageText[6: len(messageText)]
+            autor = messageText[6 : len(messageText)]
             autors.append(autor)
     return autors
 

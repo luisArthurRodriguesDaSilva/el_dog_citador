@@ -17,7 +17,9 @@ print(openai_key)
 
 def crateIAimage(prompt):
     openai.api_key = openai_key
-    response = openai.Image.create(prompt=startOfPrompts + prompt, n=1, size="512x512")
+    response = openai.Image.create(
+        prompt=startOfPrompts + prompt, n=1, size="512x512"
+    )
     image_url = response["data"][0]["url"]
     image = requests.get(image_url).content
     imageAdress = "image.jpg"
@@ -38,8 +40,9 @@ def getEditedImage(imagePath):
 
 def getBlocksSizes(pilImage):
     [width, height] = pilImage.size
-    [widthBlock, heightBlock] = map(lambda x: int(x / diviter),
-                                    [width, height])
+    [widthBlock, heightBlock] = map(
+        lambda x: int(x / diviter), [width, height]
+    )
     return widthBlock, heightBlock
 
 
