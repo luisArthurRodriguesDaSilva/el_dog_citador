@@ -35,17 +35,17 @@ def tryIt(withDm=False):
     return tryIt
 
 
-@tryIt(True)
+@tryIt(withDm=True)
 def postIt(filename, text=""):
     api.update_status_with_media(status=text, filename=filename)
 
 
-@tryIt(True)
+@tryIt(withDm=True)
 def twetIt(text):
     api.update_status(status=text)
 
 
-@tryIt(True)
+@tryIt(withDm=True)
 def imageToMyDm(image, text=" s "):
     media = api.media_upload(filename=image)
 
@@ -57,7 +57,7 @@ def imageToMyDm(image, text=" s "):
     )
 
 
-@tryIt(True)
+@tryIt(withDm=True)
 def getActualTrending(WOE_ID=BRAZIL_WOE_ID):
     brazil_trends = api.get_place_trends(WOE_ID)
     caras = list(
@@ -66,7 +66,7 @@ def getActualTrending(WOE_ID=BRAZIL_WOE_ID):
     return caras
 
 
-@tryIt(True)
+@tryIt(withDm=True)
 def getDMautors():
     autors = []
     messages = api.get_direct_messages(count=40)
@@ -79,7 +79,7 @@ def getDMautors():
     return autors
 
 
-@tryIt(True)
+@tryIt(withDm=True)
 def makeFriends(q):
     busca = api.search_tweets(q=q)
     for i, tweet in enumerate(busca):
